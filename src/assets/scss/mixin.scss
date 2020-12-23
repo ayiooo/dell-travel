@@ -1,0 +1,12 @@
+@mixin elipsis {
+	over-flow: hidden;
+	text-overflow: elipsis;
+	white-space: nowrap;
+}
+@mixin elipsis-lines($row) {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-camp: $row; // 指定超过几行隐藏
+	over-flow: hidden;
+	text-overflow: elipsis;
+}

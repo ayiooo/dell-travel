@@ -8,8 +8,10 @@
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+@import "~assets/scss/variables.scss";
 #app {
+  background-color: $color-primary;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
