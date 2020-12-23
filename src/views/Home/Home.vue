@@ -5,7 +5,10 @@
         <span>首页</span>
       </template>
     </VHeader>
-    <HomeSwiper :swiperList="swiperList"/>
+    <HomeSwiper :swiperList="swiperList" />
+    <HomeCates :iconList="iconList" />
+    <HomeRecommend :recommendList="recommendList"/>
+    <HomeWeekend :weekendList="weekendList"/>
   </div>
 </template>
 
@@ -13,16 +16,25 @@
 // @ is an alias to /src
 import VHeader from 'cm/VHeader'
 import HomeSwiper from './childComps/HomeSwiper'
+import HomeCates from './childComps/HomeCates'
+import HomeRecommend from './childComps/HomeRecommend'
+import HomeWeekend from './childComps/HomeWeekend'
 import { getHomeData } from 'network/home'
 export default {
   name: 'Home',
   components: {
     VHeader,
-    HomeSwiper
+    HomeSwiper,
+    HomeCates,
+    HomeRecommend,
+    HomeWeekend
   },
   data () {
     return {
-      swiperList: []
+      swiperList: [],
+      iconList: [],
+      recommendList: [],
+      weekendList: []
     }
   },
   mounted () {
@@ -33,7 +45,9 @@ export default {
       const data = await getHomeData()
       console.log(data)
       this.swiperList = data.swiperList
-      console.log(this.swiperList)
+      this.iconList = data.iconList
+      this.recommendList = data.recommendList
+      this.weekendList = data.weekendList
     }
   }
 }
