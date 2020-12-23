@@ -11,13 +11,20 @@
 <script>
 // @ is an alias to /src
 import VHeader from 'cm/VHeader'
+import { getHomeData } from 'network/home'
 export default {
   name: 'Home',
   components: {
     VHeader
   },
   mounted () {
-
+    this.getData()
+  },
+  methods: {
+    async getData () {
+      const data = await getHomeData()
+      console.log(data)
+    }
   }
 }
 </script>
