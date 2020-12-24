@@ -22,11 +22,12 @@
       <!-- 热门推荐 -->
       <CityHot :hotCities="hotCities" />
       <!-- 字母表列表城市 -->
-      <CityAlpha :cities="cities" />
+      <CityAlpha :cities="cities" ref="cityAlpha"/>
     </Scroll>
 
     <!-- 搜索结果 -->
     <SearchList v-if="searchCity.length" />
+    <AlphaTouch :alpha="alpha" @handleScrollToElement="handleScrollToElement"/>
   </div>
 </template>
 
@@ -38,6 +39,7 @@ import CityCurrent from './childComps/CityCurrent'
 import CityHot from './childComps/CityHot'
 import CityAlpha from './childComps/CityAlpha'
 import SearchList from './childComps/SearchList'
+import AlphaTouch from './childComps/AlphaTouch'
 import Scroll from 'cm/Scroll'
 
 import { getCityData } from 'network/city'
@@ -51,6 +53,7 @@ export default {
     CityHot,
     CityAlpha,
     SearchList,
+    AlphaTouch,
     Scroll
   },
   data () {
@@ -62,7 +65,7 @@ export default {
   },
   mounted () {
     this.getCityData()
-    this.$refs.scroll.refresh()
+    this.scroll = this.$refs.scroll
   },
   methods: {
     async getCityData () {
@@ -76,6 +79,18 @@ export default {
       } catch (err) {
         console.log(err)
       }
+    },
+    handleScrollToElement (index) {
+      const s = this.alpha[index]
+      const el = this.$refs.cityAlpha.$refs[s][0]
+      console.log(s)
+      console.log(el)
+      this.scroll.scrollToElement(el)
+    }
+  },
+  computed: {
+    alpha () {
+      return Object.keys(this.cities)
     }
   }
 }

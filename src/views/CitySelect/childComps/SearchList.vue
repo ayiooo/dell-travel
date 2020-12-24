@@ -9,9 +9,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~assets/scss/variables.scss';
 .search__list {
   position: fixed;
-  z-index: 9;
+  z-index: 999;
   top: 0.86rem;
   right: 0;
   left: 0;

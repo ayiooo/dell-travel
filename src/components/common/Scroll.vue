@@ -52,6 +52,15 @@ export default {
     scrollToTop (delay = 200) {
       this.bs && this.bs.scrtollTo && this.bs.scrtollTo(0, 0, delay)
     },
+    scrollToElement (el, delay = 200) {
+      console.log('scroll')
+      if (this.isfirstPullup) {
+        this.refresh()
+        this.isfirstPullup = false
+      }
+      // 这里要拿到对应的 ref，直接 docuemnt.getElementById 不可以
+      this.bs && this.bs.scrollToElement && this.bs.scrollToElement(el, delay)
+    },
     listenScrollPosition (position) {
       // 向下滚动 y 为负值
       const { y } = position
