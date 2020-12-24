@@ -25,7 +25,7 @@ export default {
   align-items: center;
   height: 0.43rem;
   background-color: $color-primary;
-  font-size: 0.2rem;
+  font-size: 0.18rem;
   text-align: center;
   line-height: 0.43rem;
   color: #fff;

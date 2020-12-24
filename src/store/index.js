@@ -3,8 +3,14 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-export default new Vuex.Store({
+let city = localStorage.getItem('currentCity')
+if (!city) {
+  city = localStorage.setItem('currentCity', '上海')
+}
+
+const store = new Vuex.Store({
   state: {
+    currentCity: city
   },
   mutations: {
   },
@@ -13,3 +19,5 @@ export default new Vuex.Store({
   modules: {
   }
 })
+
+export default store

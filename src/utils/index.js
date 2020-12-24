@@ -17,4 +17,18 @@ const splitArrayByCount = (arr, count) => {
   }
 }
 
-export { splitArrayByCount }
+const debounce = (fn, delay = 50) => {
+  let timer = null
+  return function (...args) {
+    if (timer) {
+      // 有定时器清除
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn.call(this, ...args)
+      clearTimeout(timer)
+    }, delay)
+  }
+}
+
+export { splitArrayByCount, debounce }

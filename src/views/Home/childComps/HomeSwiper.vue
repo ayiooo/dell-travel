@@ -2,7 +2,7 @@
   <div class="home__swiper">
     <swiper ref="mySwiper" :options="swiperOptions">
       <swiper-slide v-for="item in swiperList" :key="item.id"
-        ><img :src="item.imgUrl" alt=""
+        ><img :src="item.imgUrl" @load="handleLoad" alt=""
       /></swiper-slide>
       <div class="swiper-pagination" slot="pagination"></div>
     </swiper>
@@ -34,6 +34,11 @@ export default {
         loop: true
       }
     }
+  },
+  methods: {
+    handleLoad () {
+      this.$emit('loadOver')
+    }
   }
 }
 </script>
@@ -48,5 +53,4 @@ export default {
     width: 100%;
   }
 }
-
 </style>
