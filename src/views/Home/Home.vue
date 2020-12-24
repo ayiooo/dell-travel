@@ -4,6 +4,10 @@
       <template #center>
         <span>首页</span>
       </template>
+      <template #right>
+        <router-link to="/city"><i class="iconfont iconjiantou"></i> 无锡</router-link>
+        <!-- <span @click="handleCityClick"><i class="iconfont iconjiantou"></i> 无锡</span> -->
+      </template>
     </VHeader>
     <Scroll ref="scroll" class="custon-scroll-height">
       <HomeSwiper :swiperList="swiperList"/>
@@ -60,6 +64,11 @@ export default {
     // 轮播图加载完成执行回调
     handleLoadOver () {
       this.debounceRefresh()
+    },
+    // 路由跳转到城市选择页面
+    handleCityClick () {
+      console.log('click')
+      this.$router.push({ path: '/city' })
     }
   }
 }

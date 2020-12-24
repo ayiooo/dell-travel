@@ -36,5 +36,15 @@ export default {
   &__center {
     flex: 1;
   }
+  &__left {
+    font-weight: bold;
+  }
+  &__right {
+    font-size: 0.16rem;
+    padding-right: .05rem;
+    a {
+      color: #fff;
+    }
+  }
 }
 </style>
