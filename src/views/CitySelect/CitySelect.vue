@@ -16,18 +16,18 @@
       4. 右侧 A-Z的滑动栏
     -->
 
-    <Scroll class="city__scroll__wrapper"  ref="scroll">
+    <Scroll class="city__scroll__wrapper" ref="scroll">
       <!-- 当前城市 -->
-      <CityCurrent :currentCity="currentCity"/>
+      <CityCurrent :currentCity="currentCity" />
       <!-- 热门推荐 -->
-      <CityHot :hotCities="hotCities" @changeCity="changeCity"/>
+      <CityHot :hotCities="hotCities" @changeCity="changeCity" />
       <!-- 字母表列表城市 -->
-      <CityAlpha :cities="cities" ref="cityAlpha" @changeCity="changeCity"/>
+      <CityAlpha :cities="cities" ref="cityAlpha" @changeCity="changeCity" />
     </Scroll>
 
     <!-- 搜索结果 -->
-    <SearchList v-if="searchCity.length" />
-    <AlphaTouch :alpha="alpha" @handleScrollToElement="handleScrollToElement"/>
+    <SearchList v-if="searchCity.length" :filterCities="filterCities" />
+    <AlphaTouch :alpha="alpha" @handleScrollToElement="handleScrollToElement" />
   </div>
 </template>
 
@@ -43,6 +43,7 @@ import AlphaTouch from './childComps/AlphaTouch'
 import Scroll from 'cm/Scroll'
 
 import { getCityData } from 'network/city'
+import { debounce } from 'utils'
 import { mapState } from 'vuex'
 export default {
   name: 'CitySelect',
@@ -61,12 +62,26 @@ export default {
     return {
       searchCity: '',
       cities: {},
-      hotCities: []
+      hotCities: [],
+      filterCities: []
     }
   },
   mounted () {
     this.getCityData()
     this.scroll = this.$refs.scroll
+    this.debounceRefreshFilterCities = debounce(() => {
+      // 直接这样写有点太消耗性能！！！ 我们封装到函数里
+      const { searchCity, cities } = this
+      const list = []
+      for (const key in cities) {
+        cities[key].forEach(item => {
+          if (item.name.indexOf(searchCity) > -1 || item.spell.indexOf(searchCity) > -1) {
+            list.push(item)
+          }
+        })
+      }
+      this.filterCities = list
+    })
   },
   methods: {
     async getCityData () {
@@ -98,6 +113,11 @@ export default {
       return Object.keys(this.cities)
     },
     ...mapState(['currentCity'])
+  },
+  watch: {
+    searchCity (newVal, oldVal) {
+      this.debounceRefreshFilterCities()
+    }
   }
 }
 </script>
@@ -109,6 +129,6 @@ export default {
   font-size: 0.16rem;
 }
 .city__scroll__wrapper {
-  height: calc(100vh - .86rem);
+  height: calc(100vh - 0.86rem);
 }
 </style>

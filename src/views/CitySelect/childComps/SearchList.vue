@@ -1,10 +1,30 @@
 <template>
-  <div class="search__list"></div>
+  <div class="search__list">
+    <Scroll class="search__list__scroll">
+      <div
+        class="search__list__item border-bottom-1px"
+        v-for="city in filterCities"
+        :key="city.id"
+      >
+        {{ city.name }}
+      </div>
+    </Scroll>
+  </div>
 </template>
 
 <script>
+import Scroll from 'cm/Scroll'
 export default {
-  name: 'SearchList'
+  name: 'SearchList',
+  props: {
+    filterCities: {
+      type: Array,
+      required: true
+    }
+  },
+  components: {
+    Scroll
+  }
 }
 </script>
 
@@ -17,6 +37,14 @@ export default {
   right: 0;
   left: 0;
   bottom: 0;
-  background-color: tomato;
+
+  &__scroll {
+    height: 100%;
+    /* background-color: tomato; */
+    background-color: #fff;
+  }
+  &__item {
+    line-height: .4rem;
+  }
 }
 </style>

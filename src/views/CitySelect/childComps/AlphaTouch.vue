@@ -58,7 +58,7 @@ export default {
   padding: .1rem 0;
   z-index: 9;
   right: .2rem;
-  /* background-color: tomato; */
+  background-color: tomato;
   &__item {
     line-height: 0.24rem;
     padding: 0 .1rem;
