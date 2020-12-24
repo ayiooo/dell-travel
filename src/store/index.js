@@ -13,8 +13,15 @@ const store = new Vuex.Store({
     currentCity: city
   },
   mutations: {
+    changeCity (state, cityname) {
+      state.currentCity = cityname
+      localStorage.setItem('currentCity', cityname)
+    }
   },
   actions: {
+    changeCity ({ mutations }, cityname) {
+      this.commit('changeCity', cityname)
+    }
   },
   modules: {
   }

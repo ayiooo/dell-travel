@@ -2,14 +2,17 @@
   <div class="city__current">
     <div class="city__current__position">我的位置</div>
     <div class="city__current__wrapper">
-      <div class="city__current__item">北京</div>
+      <div class="city__current__item">{{currentCity}}</div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CityCurrent'
+  name: 'CityCurrent',
+  props: {
+    currentCity: String
+  }
 }
 </script>
 

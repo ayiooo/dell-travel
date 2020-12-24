@@ -5,15 +5,17 @@
         <span>首页</span>
       </template>
       <template #right>
-        <router-link to="/city"><i class="iconfont iconjiantou"></i> 无锡</router-link>
+        <router-link to="/city"
+          ><i class="iconfont iconjiantou"></i> {{ currentCity }}</router-link
+        >
         <!-- <span @click="handleCityClick"><i class="iconfont iconjiantou"></i> 无锡</span> -->
       </template>
     </VHeader>
     <Scroll ref="scroll" class="custon-scroll-height">
-      <HomeSwiper :swiperList="swiperList"/>
+      <HomeSwiper :swiperList="swiperList" />
       <HomeCates :iconList="iconList" />
       <HomeRecommend :recommendList="recommendList" />
-      <HomeWeekend :weekendList="weekendList"  @loadOver="handleLoadOver"/>
+      <HomeWeekend :weekendList="weekendList" @loadOver="handleLoadOver" />
     </Scroll>
   </div>
 </template>
@@ -29,6 +31,8 @@ import Scroll from 'cm/Scroll'
 
 import { getHomeData } from 'network/home'
 import { debounce } from 'utils'
+
+import { mapState } from 'vuex'
 export default {
   name: 'Home',
   components: {
@@ -46,6 +50,9 @@ export default {
       recommendList: [],
       weekendList: []
     }
+  },
+  computed: {
+    ...mapState(['currentCity'])
   },
   mounted () {
     this.getData()

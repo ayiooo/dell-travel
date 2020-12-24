@@ -2,7 +2,7 @@
   <div class="city__hot">
     <div class="city__hot__name">热门城市</div>
     <div class="city__hot__list">
-      <div class="city__hot__item" v-for="city in hotCities" :key="city.id">
+      <div class="city__hot__item" @click="changeCity(city.name)" v-for="city in hotCities" :key="city.id">
         {{ city.name }}
       </div>
     </div>
@@ -16,6 +16,11 @@ export default {
     hotCities: {
       type: Array,
       required: true
+    }
+  },
+  methods: {
+    changeCity (name) {
+      this.$emit('changeCity', name)
     }
   }
 }

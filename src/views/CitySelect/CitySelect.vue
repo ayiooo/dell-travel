@@ -18,11 +18,11 @@
 
     <Scroll class="city__scroll__wrapper"  ref="scroll">
       <!-- 当前城市 -->
-      <CityCurrent />
+      <CityCurrent :currentCity="currentCity"/>
       <!-- 热门推荐 -->
-      <CityHot :hotCities="hotCities" />
+      <CityHot :hotCities="hotCities" @changeCity="changeCity"/>
       <!-- 字母表列表城市 -->
-      <CityAlpha :cities="cities" ref="cityAlpha"/>
+      <CityAlpha :cities="cities" ref="cityAlpha" @changeCity="changeCity"/>
     </Scroll>
 
     <!-- 搜索结果 -->
@@ -43,6 +43,7 @@ import AlphaTouch from './childComps/AlphaTouch'
 import Scroll from 'cm/Scroll'
 
 import { getCityData } from 'network/city'
+import { mapState } from 'vuex'
 export default {
   name: 'CitySelect',
   components: {
@@ -86,12 +87,17 @@ export default {
       console.log(s)
       console.log(el)
       this.scroll.scrollToElement(el)
+    },
+    changeCity (name) {
+      this.$router.push({ path: '/' })
+      this.$store.dispatch('changeCity', name)
     }
   },
   computed: {
     alpha () {
       return Object.keys(this.cities)
-    }
+    },
+    ...mapState(['currentCity'])
   }
 }
 </script>
