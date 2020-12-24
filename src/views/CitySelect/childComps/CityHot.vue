@@ -32,7 +32,7 @@ export default {
   &__list {
     display: flex;
     flex-wrap: wrap;
-    padding-right: .3rem;
+    padding-right: 20%;
     padding-bottom: .1rem;
     justify-content: space-evenly;
   }
@@ -40,7 +40,8 @@ export default {
     @include border-1px($color-primary, 0.05rem);
     color: $color-primary;
     line-height: 0.3rem;
-    padding: 0 0.3rem;
+    width: 26%;
+    text-align: center;
     margin-top: .1rem;
   }
 }

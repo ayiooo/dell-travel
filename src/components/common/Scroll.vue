@@ -20,9 +20,14 @@ export default {
           // 触发点击
           click: true,
           // 是否监听上拉加载更多
-          pullUpLoad: false
+          pullUpLoad: true
         }
       }
+    }
+  },
+  data () {
+    return {
+      isfirstPullup: true
     }
   },
   mounted () {
@@ -55,6 +60,10 @@ export default {
     },
     // 下拉的时候发送下拉事件
     pullingUpHandler () {
+      if (this.isfirstPullup) {
+        this.refresh()
+        this.isfirstPullup = false
+      }
       this.$emit('pullingUp')
     },
     // 下拉的数据加载完成之后执行完成下拉操作

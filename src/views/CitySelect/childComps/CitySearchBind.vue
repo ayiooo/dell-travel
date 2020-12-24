@@ -6,7 +6,7 @@
         type="text"
         placeholder="请输入城市名或拼音"
         :value="city"
-        @input="$emit('change', $event.target.value)"
+        @input="handleInputChange"
         maxlength="20"
       />
       <i class="iconfont iconsousuo"></i>
@@ -15,13 +15,14 @@
 
 <script>
 export default {
-  name: 'CitySearch',
-  model: {
-    prop: 'city',
-    event: 'change'
-  },
+  name: 'CitySearchBind',
   props: {
     city: String
+  },
+  methods: {
+    handleInputChange (e) {
+      this.$emit('update:city', e.target.value)
+    }
   }
 }
 </script>
