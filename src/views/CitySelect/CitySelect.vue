@@ -32,19 +32,42 @@
       </div>
     </div>
     <!-- 热门推荐 -->
+    <CityHot :hotCities="hotCities"/>
   </div>
 </template>
 
 <script>
 import VHeader from 'cm/VHeader'
+import CityHot from './childComps/CityHot'
+import { getCityData } from 'network/city'
 export default {
   name: 'CitySelect',
   components: {
-    VHeader
+    VHeader,
+    CityHot
   },
   data () {
     return {
-      searchCity: ''
+      searchCity: '',
+      cities: {},
+      hotCities: []
+    }
+  },
+  mounted () {
+    this.getCityData()
+  },
+  methods: {
+    async getCityData () {
+      try {
+        const data = await getCityData()
+        this.cities = data.cities
+        this.hotCities = data.hotCities
+        console.log(this.cities)
+        console.log(this.hotCities)
+        return data
+      } catch (err) {
+        console.log(err)
+      }
     }
   }
 }
