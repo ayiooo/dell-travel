@@ -194,13 +194,13 @@ export default {
 <style lang="scss" scoped>
 .detail {
   font-size: 0.16rem;
-  margin-top: .43rem;
+  /* margin-top: .43rem; */
   &__header {
-    position: fixed;
+    /* position: fixed;
     top: 0;
     width: 100%;
     height: .43rem;
-    z-index: 1;
+    z-index: 1; */
   }
   &__banner {
     &__wrapper {
