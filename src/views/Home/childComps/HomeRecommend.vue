@@ -2,7 +2,7 @@
   <div class="home__recommend">
     <div class="home__recommend__title">为你推荐</div>
     <div class="recommend__list">
-      <div class="recommend__item border-bottom-1px" v-for="item in recommendList" :key="item.id">
+      <div class="recommend__item border-bottom-1px" v-for="item in recommendList" :key="item.id" @click="handleItemClick(item.id)">
         <img class="recommend__item__img" :src="item.imgUrl" alt="">
         <div class="recommend__item__info">
           <div class="recommend__item__title">{{item.title}}</div>
@@ -21,7 +21,16 @@ export default {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    handleItemClick (id) {
+      this.$router.push({
+        name: 'Detail',
+        params: { id: id }
+      })
+    }
   }
+
 }
 </script>
 
@@ -39,6 +48,7 @@ export default {
   padding: .1rem 0;
   &__img {
     width: .85rem;
+    height: .85rem;
   }
   &__info {
     flex: 1;

@@ -6,7 +6,7 @@
     @touchend="handleTouchEnd"
     ref="alpha"
   >
-    <div class="alpha__item" v-for="a in alpha" :key="a">{{a}}</div>
+    <div class="alpha__item" v-for="a in alpha" :key="a">{{ a }}</div>
   </div>
 </template>
 
@@ -30,9 +30,11 @@ export default {
   methods: {
     handleTouchStart (e) {
       // 这里得到容器所在高度，每一格的高度
+      e.preventDefault()
       this.isTouch = true
     },
     handleTouchMove (e) {
+      e.preventDefault()
       const y = e.touches[0].clientY
       // console.log(y)
       // console.log(this.offsetTop)
@@ -42,7 +44,8 @@ export default {
       }
       this.$emit('handleScrollToElement', index)
     },
-    handleTouchEnd () {
+    handleTouchEnd (e) {
+      e.preventDefault()
       this.isTouch = false
     }
   }
@@ -55,13 +58,13 @@ export default {
 .alpha {
   position: fixed;
   top: 0.9rem;
-  padding: .1rem 0;
+  padding: 0.1rem 0;
   z-index: 9;
-  right: .2rem;
+  right: 0.2rem;
   background-color: tomato;
   &__item {
     line-height: 0.24rem;
-    padding: 0 .1rem;
+    padding: 0 0.1rem;
     text-align: center;
     color: $color-primary;
     text-transform: uppercase;

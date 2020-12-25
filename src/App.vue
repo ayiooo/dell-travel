@@ -7,6 +7,6 @@
 <style lang="scss" scoped>
 #app {
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 </style>
